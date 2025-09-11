@@ -1,5 +1,6 @@
 package com.bookmymovie.events.entities;
 
+import com.bookmymovie.events.dto.enums.EventStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,25 +22,24 @@ public class Events {
 
     private String eventName;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private EventStatus status;
 
     private String description;
 
     private Long eventCategory;
 
-    private UUID eventOwner;
+    private UUID eventAdmin;
 
     private Date releaseDate;
 
-    private Date removeDate;
-
     private Long duration;
-
-    @OneToMany(mappedBy = "events", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ScreenSchedule> screenSchedules = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "eventCategory", insertable = false , updatable = false)
     private EventCategory eventCategories;
+
+    @OneToMany(mappedBy = "events", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EventLanguage> eventLanguages = new ArrayList<>();
 
 }

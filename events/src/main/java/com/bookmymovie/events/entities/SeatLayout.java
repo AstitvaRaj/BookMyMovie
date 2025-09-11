@@ -3,12 +3,14 @@ package com.bookmymovie.events.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@ToString
 public class SeatLayout {
 
     private Integer row;
@@ -19,15 +21,14 @@ public class SeatLayout {
 
     private boolean blank = false;
 
-    private UUID layoutId;
+    private UUID layoutId = UUID.randomUUID();
 
-    public SeatLayout(Integer row, Integer columns, String seatsCategory, boolean blank) {
-        this.row = row;
-        this.columns = columns;
-        this.seatsCategory = seatsCategory;
-        this.blank = blank;
-        layoutId = UUID.randomUUID();
-        System.out.println("layout " + this);
-    }
+    private Character rowStart;
+
+    private Character rowEnd;
+
+    private Integer colStart;
+
+    private Integer colEnd;
 
 }

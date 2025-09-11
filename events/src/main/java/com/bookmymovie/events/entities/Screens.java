@@ -1,5 +1,6 @@
 package com.bookmymovie.events.entities;
 
+import com.bookmymovie.events.entities.enums.VenueStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,15 +21,16 @@ public class Screens {
     @Column(name = "id", nullable = false)
     private UUID id;
 
-    private String screen_name;
+    private String screenName;
 
     private UUID venue;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private VenueStatus status;
 
     private Date createdDate = new Date();
 
-    private Integer screen_type;
+    private Integer screenType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id", insertable = false, updatable = false)

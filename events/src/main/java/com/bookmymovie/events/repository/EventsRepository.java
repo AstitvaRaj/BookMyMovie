@@ -15,6 +15,5 @@ import java.util.UUID;
 @Repository
 public interface EventsRepository extends JpaRepository<Events, UUID> , JpaSpecificationExecutor<Events> {
 
-    List<Events> findByScreenSchedules_StartTimeGreaterThanEqual(@Nullable Date startTime, Pageable pageable);
 
 }

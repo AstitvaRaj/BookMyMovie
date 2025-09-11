@@ -25,7 +25,7 @@ public class VenueEntity {
 
     private UUID owner;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private VenueStatus status ;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,10 +1,13 @@
 package com.bookmymovie.events.entities;
 
+import com.bookmymovie.events.dto.enums.EventScheduledStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -18,22 +21,23 @@ public class ScreenSchedule {
     @Column(name = "id", nullable = false)
     private UUID id;
 
-    private UUID screen;
-
-    private UUID event;
-
     private Date startTime;
 
     private Date endTime;
 
-    private String status ;
+    @Enumerated(EnumType.STRING)
+    private EventScheduledStatus status ;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event", updatable = false, insertable = false)
-    private Events events;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "screen", updatable = false, insertable = false)
+    @JoinColumn(name = "screen")
     private Screens screens;
+
+    @ManyToOne
+    @JoinColumn(name = "event")
+    private EventLanguage events;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id")
+    private List<SeatPricingEntity> seatPricing = new ArrayList<>();
 
 }
