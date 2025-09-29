@@ -8,7 +8,7 @@ import reactor.core.publisher.Mono;
 @Configuration
 public class RateLimiterKeyConfig {
 
-    @Bean
+//    @Bean
     public KeyResolver ipKeyResolver() {
         return exchange -> Mono.just(
                 exchange.getRequest()

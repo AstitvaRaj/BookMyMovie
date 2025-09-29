@@ -11,10 +11,18 @@ public class GatewayConfig {
     @Bean
     public RouteLocator customRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("movie_service", r -> r
-                        .path("/api/**") // Incoming path
-                        .filters(f -> f.stripPrefix(1)) // Remove /movies before forwarding
-                        .uri("http://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg")) // Downstream service
+                .route("event_service", r -> r
+                        .path("/events/**") // Incoming path
+                        .filters(f -> f.stripPrefix(1))
+                        .uri("http://localhost:8082/"))
+                .route("security_service", r -> r
+                        .path("/secure/**") // Incoming path
+                        .filters(f -> f.stripPrefix(1))
+                        .uri("http://localhost:8080/"))
+                .route("payment_service", r -> r
+                        .path("/payment/**") // Incoming path
+                        .filters(f -> f.stripPrefix(1))
+                        .uri("http://localhost:8083/"))
                 .build();
     }
 }
